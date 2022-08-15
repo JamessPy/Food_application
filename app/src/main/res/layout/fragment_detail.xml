@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DetailFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.foodapp.viewmodel.DetailViewModel" />
+
+        <variable
+            name="detailFragment"
+            type="com.example.foodapp.fragments.DetailFragment" />
+
+        <variable
+            name="food"
+            type="com.example.foodapp.data.Food" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+
+
+        <ImageView
+            android:id="@+id/ivDetailFoodImage"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView9"
+            app:load_image="@{food.foodImageName}" />
+
+        <TextView
+            android:id="@+id/tvDetailFoodPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@{`₺`+ String.valueOf(food.foodPrice)}"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDetailFoodImage" />
+
+        <TextView
+            android:id="@+id/tvDetailFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{food.foodName}"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvDetailFoodPrice"
+            app:layout_constraintStart_toStartOf="@+id/tvDetailFoodPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailFoodPrice" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDetailAddToCart"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_color"
+            android:onClick="@{()->detailFragment.AddToCart(food,Integer.parseInt(tvDetailQuantity.getText().toString()))}"
+            android:text="Sepete Ekle"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvDetailSubTotal" />
+
+        <TextView
+            android:id="@+id/tvDetailSubTotal"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="₺0"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="99dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ratings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_color"
+            android:backgroundTint="@color/primary"
+            android:text="25-35 dk"
+            app:layout_constraintBottom_toTopOf="@+id/btnDetailAddToCart"
+            app:layout_constraintEnd_toStartOf="@+id/chip5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearAddDeleteDetail" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:text="Ücretsiz Teslimat"
+            app:layout_constraintBottom_toBottomOf="@+id/chip4"
+            app:layout_constraintEnd_toStartOf="@+id/chip6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/chip4"
+            app:layout_constraintTop_toTopOf="@+id/chip4" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:text="İndirim %10"
+            app:layout_constraintBottom_toBottomOf="@+id/chip5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/chip5"
+            app:layout_constraintTop_toTopOf="@+id/chip5" />
+
+        <LinearLayout
+            android:id="@+id/linearAddDeleteDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailFoodName">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDetailDelete"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:background="@drawable/remove"
+                android:backgroundTint="@color/primary"
+                android:foregroundGravity="center"
+                android:foregroundTint="@color/white"
+                android:onClick="@{()->detailFragment.Delete()}" />
+
+
+            <TextView
+                android:id="@+id/tvDetailQuantity"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_color"
+                android:backgroundTint="@color/primary"
+                android:gravity="center"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDetailAdd"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/add"
+                android:foregroundGravity="center"
+                android:foregroundTint="@color/white"
+                android:onClick="@{()->detailFragment.Add()}" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivDetailFavorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
